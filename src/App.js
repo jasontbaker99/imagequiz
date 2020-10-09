@@ -7,6 +7,7 @@ import {
 } from "react-router-dom"
 import Home from './Components/Home';
 import Login from './Components/Login';
+import daffodil from "./images/daffodil.png";
 
 function App() {
   return (
