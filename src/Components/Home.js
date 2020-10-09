@@ -34,7 +34,7 @@ class Home extends React.Component {
         ];
 
         function drawPics(f) {
-            let p = "images/"+f.picture;
+            let p = "/images/"+f.picture;
             return (
                 <div>
                     <img className="image" src={p} alt="" />
@@ -70,8 +70,8 @@ class Home extends React.Component {
                     {drawPics(flowers[5])}
                     {drawPics(flowers[6])}
                     {drawPics(flowers[7])}
-                    <img alt="" src="../images/daffodil.png" />
-                    <img alt="" src="/jasontbaker99/ISTA330/blob/gh-pages/practicum/week-5/images/daffodil.png?raw=true" />
+                    <img className="image" alt="" src="../images/daffodil.png" />
+                    <img className="image" alt="" src="/jasontbaker99/ISTA330/blob/gh-pages/practicum/week-5/images/daffodil.png?raw=true" />
                     done
                 </div>
             </div>
