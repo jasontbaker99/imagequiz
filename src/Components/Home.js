@@ -70,6 +70,7 @@ class Home extends React.Component {
                     {drawPics(flowers[5])}
                     {drawPics(flowers[6])}
                     {drawPics(flowers[7])}
+                    <img src="../images/daffodil.png" />
                 </div>
             </div>
         );
