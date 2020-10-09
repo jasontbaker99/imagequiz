@@ -1,6 +1,7 @@
 import React from 'react';
 import './Home.css';
 import { Link } from "react-router-dom"
+import daffodil from "./images/daffodil.png";
 
 class Home extends React.Component {
 
@@ -62,14 +63,7 @@ class Home extends React.Component {
                         : <Link to='/login'>Login</Link>}
                 </div>
                 <div className="Pics">
-                    {drawPics(flowers[0])}
-                    {drawPics(flowers[1])}
-                    {drawPics(flowers[2])}
-                    {drawPics(flowers[3])}
-                    {drawPics(flowers[4])}
-                    {drawPics(flowers[5])}
-                    {drawPics(flowers[6])}
-                    {drawPics(flowers[7])}
+                    <img className="image" src={daffodil} alt=""/>
                 </div>
             </div>
         );
