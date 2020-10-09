@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/imagequiz/static/css/main.cf74144a.chunk.css",
-    "main.js": "/imagequiz/static/js/main.24e11c89.chunk.js",
-    "main.js.map": "/imagequiz/static/js/main.24e11c89.chunk.js.map",
+    "main.js": "/imagequiz/static/js/main.dac3ac5a.chunk.js",
+    "main.js.map": "/imagequiz/static/js/main.dac3ac5a.chunk.js.map",
     "runtime-main.js": "/imagequiz/static/js/runtime-main.2f3f5ace.js",
     "runtime-main.js.map": "/imagequiz/static/js/runtime-main.2f3f5ace.js.map",
     "static/js/2.b137ff23.chunk.js": "/imagequiz/static/js/2.b137ff23.chunk.js",
     "static/js/2.b137ff23.chunk.js.map": "/imagequiz/static/js/2.b137ff23.chunk.js.map",
     "index.html": "/imagequiz/index.html",
-    "precache-manifest.02f47c4b80a8fb20a54e18e53b9ed094.js": "/imagequiz/precache-manifest.02f47c4b80a8fb20a54e18e53b9ed094.js",
+    "precache-manifest.0d0b1388b4779a8ed4ae11fe6e9c80d3.js": "/imagequiz/precache-manifest.0d0b1388b4779a8ed4ae11fe6e9c80d3.js",
     "service-worker.js": "/imagequiz/service-worker.js",
     "static/css/main.cf74144a.chunk.css.map": "/imagequiz/static/css/main.cf74144a.chunk.css.map",
     "static/js/2.b137ff23.chunk.js.LICENSE.txt": "/imagequiz/static/js/2.b137ff23.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.2f3f5ace.js",
     "static/js/2.b137ff23.chunk.js",
     "static/css/main.cf74144a.chunk.css",
-    "static/js/main.24e11c89.chunk.js"
+    "static/js/main.dac3ac5a.chunk.js"
   ]
 }
