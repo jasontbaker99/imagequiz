@@ -1,6 +1,7 @@
 import React from 'react';
 import './Home.css';
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import daffodilimg from "/images/daffodil.png"
 
 class Home extends React.Component {
 
@@ -34,10 +35,10 @@ class Home extends React.Component {
         ];
 
         function drawPics(f) {
-            let p = "/images/"+f.picture;
+            //let p = "/images/"+f.picture;
             return (
                 <div>
-                    <img className="image" src={p} alt="" />
+                    <img className="image" src={daffodilimg} alt="" />
                     <br/>
                     {f.name}
                 </div>
@@ -63,13 +64,6 @@ class Home extends React.Component {
                 </div>
                 <div className="Pics">
                     {drawPics(flowers[0])}
-                    {drawPics(flowers[1])}
-                    {drawPics(flowers[2])}
-                    {drawPics(flowers[3])}
-                    {drawPics(flowers[4])}
-                    {drawPics(flowers[5])}
-                    {drawPics(flowers[6])}
-                    {drawPics(flowers[7])}
                 </div>
             </div>
         );
