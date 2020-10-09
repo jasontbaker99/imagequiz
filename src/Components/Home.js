@@ -34,12 +34,12 @@ class Home extends React.Component {
         ];
 
         function drawPics(f) {
-            let p = "../images/"+f.picture;
+            let p = "/images/"+f.picture;
             return (
                 <div>
                     <img src={p}/>
                     <br/>
-                    {f.name}
+                    {f.name+" and "+p}
                 </div>
             );
 
