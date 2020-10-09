@@ -10,17 +10,15 @@ import Login from './Components/Login';
 
 function App() {
   return (
-    <div>
-      <BrowserRouter>
-        <Switch>
-          <Route exact path='/' render={props=> <Home {...props} />}>
-          </Route>
-          <Route path='/login'>
-            <Login />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path='/login'>
+          <Login />
+        </Route>
+        <Route path='/' render={props => <Home {...props} />}>
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 
