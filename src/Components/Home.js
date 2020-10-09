@@ -1,7 +1,6 @@
 import React from 'react';
 import './Home.css';
 import { Link } from "react-router-dom"
-import daffodil from "./images/daffodil.png";
 
 class Home extends React.Component {
 
