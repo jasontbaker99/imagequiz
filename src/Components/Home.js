@@ -37,7 +37,7 @@ class Home extends React.Component {
             let p = "images/"+f.picture;
             return (
                 <div>
-                    <img src={p} alt="" />
+                    <img className="image" src={p} alt="" />
                     <br/>
                     {f.name+" and "+p}
                 </div>
@@ -72,7 +72,7 @@ class Home extends React.Component {
                     {drawPics(flowers[7])}
                     <img alt="" src="../images/daffodil.png" />
                     <img alt="" src="/jasontbaker99/ISTA330/blob/gh-pages/practicum/week-5/images/daffodil.png?raw=true" />
-                    
+                    done
                 </div>
             </div>
         );
