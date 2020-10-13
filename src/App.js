@@ -7,10 +7,10 @@ import {
 } from "react-router-dom"
 import Home from './Components/Home';
 import Login from './Components/Login';
-
+//basename={process.env.PUBLIC_URL}
 function App() {
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <BrowserRouter >
       <Switch>
         <Route path='/login'>
           <Login />
