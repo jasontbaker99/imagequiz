@@ -34,10 +34,10 @@ class Home extends React.Component {
         ];
 
         function drawPics(f) {
-            //let p = "../images/"+f.picture   process.env.PUBLIC_URL;
+            //let p = "../images/"+f.picture;
             return (
                 <div>
-                    <img className="image" src={"week-5/images/" + f.picture} alt="" />
+                    <img className="image" src={process.env.PUBLIC_URL + "/images/" + f.picture} alt="" />
                     <br/>
                     {f.name}
                 </div>
