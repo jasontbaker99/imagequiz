@@ -37,7 +37,7 @@ class Home extends React.Component {
             //let p = "../images/"+f.picture;
             return (
                 <div>
-                    <img className="image" src={process.env.PUBLIC_URL + "/image/" + f.picture} alt="" />
+                    <img className="image" src={process.env.PUBLIC_URL + "/images/" + f.picture} alt="" />
                     <br/>
                     {f.name}
                 </div>
