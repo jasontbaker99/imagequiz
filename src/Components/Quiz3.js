@@ -12,7 +12,7 @@ class Quiz3 extends React.Component {
             entries: [],
             cursor: 12,
             score: 0,
-            answers: [0,0,0,0,0,0,0]
+            answers: [0,0,0,0,0,0]
         };
     }
 
@@ -45,16 +45,16 @@ class Quiz3 extends React.Component {
         const {entries, cursor} = this.state;
         return(
             <div className="Content">
-                {entries.length > 0 ? 
+                <button className='buttons' onClick={this.right}>
+                    {questionNames[0+((this.state.cursor-12)*3)]}</button>
+                <button className='buttons' onClick={this.wrong}>
+                    {questionNames[1+((this.state.cursor-12)*3)]}</button>
+                <button className='buttons' onClick={this.wrong}>
+                    {questionNames[2+((this.state.cursor-12)*3)]}</button>
+                    {entries.length > 0 ? 
                 <div className="entry">
                     <Entry entry={entries[cursor]}/>
                 </div> : ''};
-                    <button className='buttons' onClick={this.right}>
-                        {questionNames[0+((this.state.cursor-12)*3)]}</button>
-                    <button className='buttons' onClick={this.wrong}>
-                        {questionNames[1+((this.state.cursor-12)*3)]}</button>
-                    <button className='buttons' onClick={this.wrong}>
-                        {questionNames[2+((this.state.cursor-12)*3)]}</button>
             </div>
         );
     }
@@ -78,11 +78,16 @@ class Quiz3 extends React.Component {
         }
     }
 
+    restart = () =>{
+        this.setState({cursor: 12});
+        let temp = [0,0,0,0,0,0]
+        this.setState({answers: temp});
+    }
+
     render() {
         let total = 0;
-        console.log(this.state.answers)
-        total = this.state.answers[0]+this.state.answers[1]+this.state.answers[2]+this.state.answers[3]+this.state.answers[4]+this.state.answers[5]+this.state.answers[6];
-        return (
+        //console.log(this.state.answers)
+        total = this.state.answers[0]+this.state.answers[1]+this.state.answers[2]+this.state.answers[3]+this.state.answers[4]+this.state.answers[5];        return (
             <div>
                 <div className="TopRight">
                     <Link to="/">Home</Link>
@@ -96,7 +101,7 @@ class Quiz3 extends React.Component {
                 </div>
                 <div className="Content">
                     {this.state.cursor < 18 ? <div>{this.body()}</div>
-                        : "Your Score: "+total+"/6"}
+                        : <div>{"Your Score: "+total+"/6"}<br/><button onClick={this.restart}>Retry</button></div>}
                 </div>
             </div>
         );

@@ -12,7 +12,7 @@ class Quiz1 extends React.Component {
             entries: [],
             cursor: 0,
             score: 0,
-            answers: [0,0,0,0,0,0,0]
+            answers: [0,0,0,0,0,0]
         };
     }
 
@@ -80,10 +80,17 @@ class Quiz1 extends React.Component {
         }
     }
 
+    restart = () =>{
+        this.setState({cursor: 0});
+        let temp = [0,0,0,0,0,0]
+        this.setState({answers: temp});
+    }
+
     render() {
-        let total = 0;
-        console.log(this.state.answers)
-        total = this.state.answers[0]+this.state.answers[1]+this.state.answers[2]+this.state.answers[3]+this.state.answers[4]+this.state.answers[5]+this.state.answers[6];
+        var total = 0;
+        //console.log(this.state.answers);
+        total = this.state.answers[0]+this.state.answers[1]+this.state.answers[2]+this.state.answers[3]+this.state.answers[4]+this.state.answers[5];
+        //console.log(total);
         return (
             <div>
                 <div className="TopRight">
@@ -98,7 +105,7 @@ class Quiz1 extends React.Component {
                 </div>
                 <div className="Content">
                     {this.state.cursor < 6 ? <div>{this.body()}</div>
-                        : "Your Score: "+total+"/6"}
+                        : <div>{"Your Score: "+total+"/6"}<br/><button onClick={this.restart}>Retry</button></div>}
                 </div>
             </div>
         );
