@@ -4,39 +4,64 @@ import { Link } from "react-router-dom"
 
 class Home extends React.Component {
 
+    constructor(props){
+        super(props);
+        this.state = {
+            load: true,
+            id: 0,
+            pic: "",
+            name: "",
+            scores: [],
+        };
+    }
+
+    getMetaData = () => {
+        let api = 'https://jasontbaker-imagequiz.herokuapp.com/quizzes';
+        fetch(api).then(x => x.json()).then(out => console.log(out)).catch(e => console.log(e));
+        fetch(api).then(x => x.json()).then(out => {
+            console.log(out);
+            let q = [];
+            let n = [];
+            let p = [];
+            for(let i=0;i<out.length;i++){    
+                q.push(out[i].id);
+                n.push(out[i].name);
+                p.push(out[i].pic);
+            }
+            this.setState({id: q});
+            this.setState({name: n});
+            this.setState({pic: p});
+        }).catch(e => console.log(e));
+        this.setState({load: false});
+    }
+
+    drawPics = (id) => {
+        let title = "/Quiz"+this.state.id[id];
+        console.log(title);
+        return (
+            <div className="imagediv">
+                <Link to={title}>
+                    <img className="image" src={process.env.PUBLIC_URL + "/images/" + this.state.pic[id]} alt="" />
+                    <br/>
+                    {this.state.name[id]}
+                </Link>
+            </div>
+        );
+    }
+
+    body = () => {
+        let t = [];
+        for(let i=0;i<this.state.name.length;i++){
+            t.push(this.drawPics(i));
+        }
+        return t;
+    }
+
     render() {
 
-        class Flower {
-            constructor(name, pictureName) {
-                this.name = name;
-                this.picture = pictureName;
-            }
+        if(this.state.load){
+            this.getMetaData();
         }
-
-        let flower = new Flower('Flower quiz', 'daffodil.png');
-        let mammal = new Flower('Mammal quiz', 'bear.png');
-        let bird = new Flower('Bird quiz', 'bird.png');
-
-        let pic = [
-            mammal,
-            bird,
-            flower,
-        ];
-
-        function drawPics(f,num) {
-            //let p = "../images/"+f.picture;
-            let title = "/Quiz"+num;
-            return (
-                <div className="imagediv">
-                    <Link to={title}>
-                        <img className="image" src={process.env.PUBLIC_URL + "/images/" + f.picture} alt="" />
-                        <br/>
-                        {f.name}
-                    </Link>
-                </div>
-            );
-
-       }
 
         let username = '';
         if (this.props.location) {
@@ -54,9 +79,9 @@ class Home extends React.Component {
                         : <Link to='/login'>Login</Link>}
                 </div>
                 <div className="Pics">
-                    {drawPics(pic[0],1)}
-                    {drawPics(pic[1],2)}
-                    {drawPics(pic[2],3)}
+                    Here are the quizes from server:<br/>
+                    Hitting "retry" at the end of the quiz<br/> will send scores to server
+                    {this.body()}
                 </div>
             </div>
         );

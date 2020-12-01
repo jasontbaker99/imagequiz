@@ -1,7 +1,7 @@
 import React from 'react';
 import './Quiz.css';
 import { Link } from "react-router-dom";
-import Server from '../ServerInterface/Server';
+//import Server from '../ServerInterface/Server';
 import Entry from './Entry';
 
 class Quiz2 extends React.Component {
@@ -9,15 +9,18 @@ class Quiz2 extends React.Component {
     constructor(props){
         super(props);
         this.state = {
+            load: true,
+            qid: [],
+            questchoice:[],
             entries: [],
-            cursor: 6,
+            cursor: 0,
             score: 0,
             answers: [0,0,0,0,0,0]
         };
     }
 
     wrong = () =>{
-        let count = this.state.cursor-6;
+        let count = this.state.cursor;
         let temp = this.state.answers;
         temp[count] = 0
         this.setState({answer: temp});
@@ -27,7 +30,7 @@ class Quiz2 extends React.Component {
     }
 
     right = () =>{
-        let count = this.state.cursor-6;
+        let count = this.state.cursor;
         let temp = this.state.answers;
         temp[count] = 1
         this.setState({answer: temp});
@@ -37,21 +40,20 @@ class Quiz2 extends React.Component {
     }
 
     body = () => {
-        let questionNames = [
-        "eagle","owl","penguin","penguin","eagle","owl",
-        "owl","duck","eagle","eagle","penguin","owl",
-        "owl","quail","duck","penguin","chicken","eagle",
-        ];
+        let questionNames = this.state.questchoice;
         const {entries, cursor} = this.state;
         return(
             <div className="Content">
-                <button className='buttons' onClick={this.wrong}>
-                    {questionNames[0+((this.state.cursor-6)*3)]}</button>
-                <button className='buttons' onClick={this.right}>
-                    {questionNames[1+((this.state.cursor-6)*3)]}</button>
-                <button className='buttons' onClick={this.wrong}>
-                    {questionNames[2+((this.state.cursor-6)*3)]}</button>
-                    {entries.length > 0 ? 
+                
+                <div className="Content">
+                    <button className='buttons' onClick={this.wrong}>
+                        {questionNames[0+(this.state.cursor*3)]}</button>
+                    <button className='buttons' onClick={this.right}>
+                        {questionNames[1+(this.state.cursor*3)]}</button>
+                    <button className='buttons' onClick={this.wrong}>
+                        {questionNames[2+(this.state.cursor*3)]}</button>
+                </div>
+                {entries.length > 0 ? 
                 <div className="entry">
                     <Entry entry={entries[cursor]}/>
                 </div> : ''};
@@ -59,35 +61,60 @@ class Quiz2 extends React.Component {
         );
     }
 
-    componentDidMount() {
-        const Entries = Server.fetchEntries();
-        this.setState({entries: Entries});
-        window.addEventListener("keydown", this.handleKeyDown);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener("keydown", this.handleKeyDown);
-    }
-
     handleKeyDown = (e) => {
-        if(e.keyCode === 39 && this.state.cursor < 11 && this.state.cursor < this.state.entries.length-1){//right
+        if(e.keyCode === 39 && this.state.cursor < 5 && this.state.cursor < this.state.entries.length-1){//right
             this.setState({cursor: this.state.cursor+1});
         }
-        if(e.keyCode === 37 && this.state.cursor > 6){//left
+        if(e.keyCode === 37 && this.state.cursor > 0){//left
             this.setState({cursor: this.state.cursor-1});
         }
     }
 
     restart = () =>{
-        this.setState({cursor: 6});
+        this.setState({cursor: 0});
         let temp = [0,0,0,0,0,0]
         this.setState({answers: temp});
+        this.setState({load1: true});
+        this.setState({load2: true});
+    }
+
+    getQuizData = () => {
+        let api = 'https://jasontbaker-imagequiz.herokuapp.com/quizzes/2';
+        fetch(api).then(x => x.json()).then(out => console.log(out)).catch(e => console.log(e));
+        fetch(api).then(x => x.json()).then(out => {
+            let qpic;
+            let page;
+            let qchoice = [];
+            let name;
+            let e = [];
+            for(let i=0;i<out[1].length;i++){    
+                if(out[1][i] != null){
+                    name = out[1][i].answer;
+                    qpic = out[1][i].picture;
+                    page = out[1][i].page;
+                    for(let j=0;j<3;j++){
+                        qchoice.push(out[1][i].choices[j]);
+                    }
+                    let image = process.env.PUBLIC_URL+"/images/"+qpic;
+                    e.push({name,image,page});
+                }
+            }
+            this.setState({entries: e});
+            this.setState({questchoice: qchoice});
+        }).catch(e => console.log(e));
+        this.setState({load: false});
     }
 
     render() {
-        let total = 0;
-        //console.log(this.state.answers)
+
+        if(this.state.load){
+            this.getQuizData();
+        }
+
+        var total = 0;
+        //console.log(this.state.answers);
         total = this.state.answers[0]+this.state.answers[1]+this.state.answers[2]+this.state.answers[3]+this.state.answers[4]+this.state.answers[5];
+        //console.log(total);
         return (
             <div>
                 <div className="TopRight">
@@ -101,7 +128,7 @@ class Quiz2 extends React.Component {
                 <br/><br/><br/><br/>
                 </div>
                 <div className="Content">
-                    {this.state.cursor < 12 ? <div>{this.body()}</div>
+                    {this.state.cursor < 6 ? <div>{this.body()}</div>
                         : <div>{"Your Score: "+total+"/6"}<br/><button onClick={this.restart}>Retry</button></div>}
                 </div>
             </div>
